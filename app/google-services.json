@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "586720318243",
+    "firebase_url": "https://basic-registration-default-rtdb.firebaseio.com",
+    "project_id": "basic-registration",
+    "storage_bucket": "basic-registration.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586720318243:android:aaf38b0c336e09961db296",
+        "android_client_info": {
+          "package_name": "com.example.medi_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586720318243-5dicc82n1rgtfsr5i4djka372rmtn8jm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfjEkNVmlxCjM3m5D3xVPjIXwP-LwGMUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586720318243-5dicc82n1rgtfsr5i4djka372rmtn8jm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
