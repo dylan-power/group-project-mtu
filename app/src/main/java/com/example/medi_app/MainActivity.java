@@ -125,11 +125,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserDetail userDetail=snapshot.getValue(UserDetail.class);
-                String name = userDetail.getFirstName() + " " + userDetail.getLastName();
+//                String name = userDetail.getFirstName() + " " + userDetail.getLastName();
                 Intent i = new Intent(getApplicationContext(),HomepageActivity.class);
                 CustomToast.createToast(getApplicationContext(),"Login Successful",false);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                i.putExtra("name", name);
+//                i.putExtra("name", name);
                 startActivity(i);
             }
 
