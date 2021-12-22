@@ -9,26 +9,46 @@
         android:id="@+id/dialog_edit_insurancecompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_your_insurance_company"
+        android:hint="Insurance company's name"
         android:inputType="text"
         android:minHeight="48dp" />
+
     <EditText
         android:id="@+id/dialog_edit_insurancenumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dialog_edit_insurancecompany"
-        android:hint="Contact number"
+        android:layout_alignStart="@+id/dialog_edit_insurancecompany"
+        android:layout_alignEnd="@+id/dialog_edit_insurancecompany"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:hint="Insurance company's contact number"
         android:inputType="phone"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/dialog_edit_insuranceemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_edit_insurancecompany"
+        android:layout_alignStart="@+id/dialog_edit_insurancenumber"
+        android:layout_alignEnd="@+id/dialog_edit_insurancenumber"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="0dp"
+        android:hint="Insurance company's email"
+        android:inputType="textWebEmailAddress"
         android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/dialoginsurance_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dialog_edit_insurancenumber"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dialog_edit_insuranceemail"
+        android:layout_alignStart="@+id/dialog_edit_insuranceemail"
+        android:layout_alignEnd="@+id/dialog_edit_insuranceemail"
+        android:layout_marginTop="14dp"
         android:text="@string/please_entername" />
-
 
 
 </RelativeLayout>

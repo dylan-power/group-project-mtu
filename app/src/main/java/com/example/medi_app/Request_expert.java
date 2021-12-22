@@ -1,7 +1,5 @@
 package com.example.medi_app;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +12,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +19,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.medi_app.util.CustomToast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,15 +29,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.BreakIterator;
-
 public class Request_expert extends AppCompatActivity {
     TextView inname;
     TextView innumber;
+    TextView inemail;
     TextView gpname;
     TextView gpnumber;
+    TextView gpemailtext;
     ImageView callgp;
     ImageView callinsurance;
+    ImageView emailinsurance;
+    ImageView emailgpbutton;
     String numselected;
     Button cancel;
     private static final int REQUEST_CALL = 1;
@@ -57,8 +55,12 @@ public class Request_expert extends AppCompatActivity {
 
         inname = findViewById(R.id.call_insurance_name);
          innumber = findViewById(R.id.call_insurance_number);
+         inemail = findViewById(R.id.expert_in_emailTV);
+         emailinsurance = findViewById(R.id.insurance_email);
+         emailgpbutton = findViewById(R.id.email_gp_img);
          gpname = findViewById(R.id.call_gpname);
          gpnumber = findViewById(R.id.call_gps_number);
+         gpemailtext = findViewById(R.id.expert_gp_emailTV);
          callgp = findViewById(R.id.gp_call);
          callinsurance = findViewById(R.id.insurance_call);
          cancel = findViewById(R.id.request_expertbutton);
@@ -68,19 +70,24 @@ public class Request_expert extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String provider = String.valueOf(snapshot.child("Insurance Company Details").child("insurance_company_On_File").getValue());
                 String providerno = String.valueOf(snapshot.child("Insurance Company Details").child("contact_number").getValue());
+                String providereml = String.valueOf(snapshot.child("Insurance Company Details").child("email").getValue());
                 String gp = String.valueOf(snapshot.child("Associated GP").child("_Name").getValue());
                 String gpno = String.valueOf(snapshot.child("Associated GP").child("contact_num").getValue());
+                String gpeml = String.valueOf(snapshot.child("Associated GP").child("_Email").getValue());
 
 
 
 
 
-                if (! (provider.equals("null") && providerno.equals("null") && gp.equals("null") && gpno.equals("null"))){
+
+                if (! (provider.equals("null") && providerno.equals("null") && gp.equals("null") && providereml.equals("null")&& gpeml.equals("null"))){
 
                     inname.setText(provider);
                     innumber.setText(providerno);
+                    inemail.setText(providereml);
                     gpname.setText(gp);
                     gpnumber.setText(gpno);
+                    gpemailtext.setText(gpeml);
 
                 }
 
@@ -94,9 +101,11 @@ public class Request_expert extends AppCompatActivity {
                         }
                     });
                     gpnumber.setText("No details entered..");
+                    gpemailtext.setText("No details entered..");
 
                     inname.setText(provider);
                     innumber.setText(providerno);
+                    inemail.setText(providereml);
 
                 }
 
@@ -113,9 +122,10 @@ public class Request_expert extends AppCompatActivity {
                          }
                      });
                     innumber.setText("No details entered..");
+                     inemail.setText("No details entered..");
 
                 }
-                 if (provider.equals("null") && providerno.equals("null") && gp.equals("null") && gpno.equals("null")){
+                 if (provider.equals("null") && providerno.equals("null")&& providereml.equals("null") && gp.equals("null") && gpno.equals("null")&& gpeml.equals("null")){
                     new AlertDialog.Builder(Request_expert.this)
                             .setTitle("No  details found")
                             .setMessage("You will need to provide us with your details before proceeding")
@@ -138,7 +148,6 @@ public class Request_expert extends AppCompatActivity {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Intent x = new Intent(Request_expert.this, HomepageActivity.class);
                                     x.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                    CustomToast.createToast(Insurance_details_view.this,"Insurance details Submitted", false);
                                     startActivity(x);
                                 }
                             })
@@ -162,11 +171,40 @@ public class Request_expert extends AppCompatActivity {
                 makePhoneCall();
             }
         });
+
+        emailinsurance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { inemail.getText().toString() });
+
+
+
+
+                startActivity(Intent.createChooser(intent, "Choose an email client"));
+            }
+        });
+
         callgp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 numselected = gpnumber.getText().toString();
                 makePhoneCall();
+            }
+        });
+
+        emailgpbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { gpemailtext.getText().toString() });
+
+
+
+
+                startActivity(Intent.createChooser(intent, "Choose an email client"));
             }
         });
 

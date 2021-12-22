@@ -18,6 +18,7 @@ public class Dialog extends AppCompatDialogFragment {
 
     private EditText editTextinsurancecompany;
     private EditText edittextphone;
+    private EditText edittextemail;
     private DialogListener listener;
     @NonNull
     @Override
@@ -25,7 +26,7 @@ public class Dialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
-        builder.setView(view).setTitle("Enter your Insurance Company's Name")
+        builder.setView(view).setTitle("Enter your Insurance Company's Details")
                 .setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -37,13 +38,15 @@ public class Dialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String company = editTextinsurancecompany.getText().toString();
                         String phoneString = edittextphone.getText().toString();
+                        String emailstring = edittextemail.getText().toString();
                         int phone = Integer.parseInt(phoneString.replaceAll("[\\D]", ""));
-                        listener.applyText(company,phone);
+                        listener.applyText(company,phone,emailstring);
 
                     }
                 });
         editTextinsurancecompany = view.findViewById(R.id.dialog_edit_insurancecompany);
         edittextphone = view.findViewById(R.id.dialog_edit_insurancenumber);
+        edittextemail = view.findViewById(R.id.dialog_edit_insuranceemail);
 
 
         return builder.create();
@@ -60,6 +63,6 @@ public class Dialog extends AppCompatDialogFragment {
     }
 
     public interface DialogListener{
-        void applyText(String company,int phone);
+        void applyText(String company,int phone, String email);
     }
 }

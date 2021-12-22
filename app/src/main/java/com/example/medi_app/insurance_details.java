@@ -206,15 +206,16 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
          public void onClick(View view) {
 
          String insurance_email = null;
-         final String insurance_company = insurancecomp_spinner.getSelectedItem().toString();
+         String insurance_company = insurancecomp_spinner.getSelectedItem().toString();
          final String insurance_company_phone = insurancecomp_spinner.getSelectedItem().toString();
          int phone = Integer.parseInt(insurance_company_phone.replaceAll("[\\D]", ""));
-         String thename = insurance_company.replaceAll("\\d","").replace("-", "");;
+         String temp = insurance_company.replaceAll("\\d","").replace("-", "");;
+         String EMAIL_PATTERN = "([^.@\\s]+)(\\.[^.@\\s]+)*@([^.@\\s]+\\.)+([^.@\\s]+)";
+         String thename = temp.replaceAll(EMAIL_PATTERN,"").replace("-", "");;
          Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(insurancecomp_spinner.getSelectedItem().toString());
          while (m.find()){
              insurance_email = m.group();
          }
-
          final String policyNo = policyNumber.getText().toString();
          final String startdate = start_date.getText().toString();
          final String endddate = end_date.getText().toString();
@@ -330,8 +331,8 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
     }
 
     @Override
-    public void applyText(String company,int phone) {
-        Insurance_companies.add(company +"                                                                                 - "+ phone);
+    public void applyText(String company,int phone,String email) {
+        Insurance_companies.add(company +"                                                                                 - "+ email + "   "+phone);
     }
 
     @Override
