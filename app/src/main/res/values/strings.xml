@@ -48,4 +48,62 @@
     <string name="below_are_the_details_of_your_gp_n_you_can_change_your_preferred_gp_by_clicking_amend_below">Below are the details of your GP \n You can change your preferred GP by clicking \'Amend\' below</string>
     <string name="amend">Amend</string>
     <string name="medi_app_request_an_expert">Medi-App Request an expert</string>
+
+
+    <!--    Medi-Predict  -->
+    <string name="medi_predict">Medi-Predict</string>
+    <string name="disease_prediction">Disease Prediction</string>
+    <string name="HeartDisease">Heart_disease</string>
+    <string name="alzheimers">Alzheimers</string>
+    <string name="heart">Heart</string>
+    <string name="submit">Submit</string>
+    <string name="age">Age</string>
+    <string name="resting_bp_mm_hg">Resting BP (mm Hg)</string>
+    <string name="serum_cholesterol_mg_dl">Serum Cholesterol (mg/dl)</string>
+    <string name="fasting_blood_sugar_mg_dl">Fasting Blood Sugar (mg/dl)</string>
+    <string name="resting_ecg">Resting ECG</string>
+    <string name="chest_pain_1_4">Chest Pain (1 – 4)</string>
+    <string name="enter_the_following_details">Enter the following details</string>
+    <string name="max_heart_rate">Max Heart Rate</string>
+    <string name="exercise_induced_angina">Exercise Induced Angina</string>
+    <string name="major_vessels_coloured_by_flourosopy_0_3">Flourosopy Vessels (0 – 3)</string>
+    <string name="sex_0_f_1_m">Sex (0 = F, 1 = M)</string>
+    <string name="st_depression">ST Depression</string>
+    <string name="peak_exercise_st_segment">Peak Exercise ST Segment</string>
+    <string name="thalassemia_3_6_7">Thalassemia (3 / 6 / 7)</string>
+    <string name="Heart">Heart</string>
+    <string name="Alzheimers">Alzheimers</string>
+    <string name="heart_image">Heart image</string>
+    <string name="diabetes_image">Diabetes image</string>
+    <string name="diabetes">Diabetes</string>
+    <string name="brain_image">Brain image</string>
+    <string name="Education">Education</string>
+    <string name="SocioEconomicStatus">Socio Economic Status</string>
+    <string name="MiniMentalStateExam">Mini Mental State Exam</string>
+    <string name="Etiv">Est Intracranial Volume</string>
+    <string name="Nwbv">Normalised Whole Brain Volume</string>
+    <string name="atlasScaleFactor">Atlas Scale Factor</string>
+    <string name="DiabetesPedigreeFunction">Diabetes Pedigree Function</string>
+    <string name="Pregnancy">Pregnancies</string>
+    <string name="Glucose">Glucose</string>
+    <string name="BloodPressure">Blood Pressure</string>
+    <string name="SkinThickness">Skin Thickness</string>
+    <string name="Insulin">Insulin</string>
+    <string name="Bmi">BMI</string>
+    <string name="AlzheimersPrediction">Alzheimer\'s Prediction</string>
+    <string name="probability_of_developing_alzheimer_s">Probability of developing Alzheimer\'s</string>
+    <string name="probability_of_developing_diabetes">Probability of Developing Diabetes</string>
+    <string name="DiabetesPrediction">Diabetes Prediction</string>
+    <string name="Probability_of_Developing_Alzheimer_s">Probability of Developing Alzheimer\'s Disease</string>
+    <string name="RESULT"> % </string>
+    <string name="probability_of_developing_HeartDisease">Probability of Developing Heart Disease</string>
+    <string name="HeartDiseasePrediction">Heart Disease Prediction</string>
+    <string name="select_disease_to_predict">Select disease to predict</string>
+    <string name="select_illness_to_predict">Select Illness to Predict</string>
+    <string name="enter_the_Following_Details">Enter Details</string>
+    <string name="EnterDetails">Enter Details</string>
+    <string name="enter_details">Enter Details</string>
+    <string name="heart_disease">Heart Disease</string>
+
+
 </resources>

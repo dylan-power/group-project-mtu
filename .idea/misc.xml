@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/blood1.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/blue_rectangle.xml" value="0.19814814814814816" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/bluecard.xml" value="0.1" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/custom_toast_background.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/disease_option.xml" value="0.1" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/ic_alzheimers.xml" value="0.1" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/ic_back.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/ic_blue_background.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/ic_diabetes.xml" value="0.1" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/ic_heart.xml" value="0.1" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/ic_heart_disease.xml" value="0.30833333333333335" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/medipredict.xml" value="0.37222222222222223" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/drawable/progress_bar.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.11880856760374833" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout-w936dp/activity_login.xml" value="0.138671875" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/MightNotNeedactivity_prediciton_result.xml" value="0.6666666666666666" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_alzheimers.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_alzheimers_prediction.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_alzheimers_result.xml" value="0.3671875" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_alzheimers_test.xml" value="0.22" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_diabetes_result.xml" value="0.3671875" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_diabetes_test.xml" value="0.22" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_diabetes_test2.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_heart_disease.xml" value="0.353125" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_heart_disease_result.xml" value="0.3375" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_heart_disease_test.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_heart_disease_test2.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_homepage.xml" value="0.3671875" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_insurance_details.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_login.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_medi_coin.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_medi_predict.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_medi_predict_entry.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_prediciton_result.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_prediction.xml" value="0.3671875" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_result.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_signup.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_support.xml" value="0.3671875" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/activity_support_gp.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/fragment_prediction_list.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/item_prediction.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/layout_dialog.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/patient_diagnosis.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/placeholder_prediction.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/prediction_item.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/miche/Desktop/caill-app/group-project-mtu/app/src/main/res/layout/prediction_placeholder.xml" value="0.20052083333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.18489583333333334" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

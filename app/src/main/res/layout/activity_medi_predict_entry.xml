@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MediPredict.MediPredictEntry">
+
+    <TextView
+        android:id="@+id/topbar_medipredict"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#03A9F4"
+        android:text="@string/medi_predict"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:gravity="bottom|center"
+        android:text="@string/disease_prediction"
+        android:textColor="#0080FF"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="@+id/topbar_medipredict"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/AlzheimersButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_blue_background"
+        android:gravity="center|bottom"
+        android:text="@string/Alzheimers"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/DiabetesButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectDisease"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/imageViewAlzheimers"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/brain_image"
+        android:elevation="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_alzheimers"
+        app:layout_constraintBottom_toBottomOf="@+id/AlzheimersButton"
+        app:layout_constraintEnd_toEndOf="@+id/AlzheimersButton"
+        app:layout_constraintStart_toStartOf="@+id/AlzheimersButton"
+        app:layout_constraintTop_toTopOf="@id/AlzheimersButton"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <Button
+        android:id="@+id/DiabetesButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/ic_blue_background"
+        android:gravity="center|bottom"
+        android:text="@string/diabetes"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/HeartDiseaseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AlzheimersButton"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/imageViewDiabetes"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/diabetes_image"
+        android:elevation="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_diabetes"
+        app:layout_constraintBottom_toBottomOf="@+id/DiabetesButton"
+        app:layout_constraintEnd_toEndOf="@+id/DiabetesButton"
+        app:layout_constraintStart_toStartOf="@+id/DiabetesButton"
+        app:layout_constraintTop_toTopOf="@id/DiabetesButton"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <ImageView
+        android:id="@+id/imageViewHeart"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/heart_image"
+        android:elevation="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_heart_disease"
+        app:layout_constraintBottom_toBottomOf="@+id/HeartDiseaseButton"
+        app:layout_constraintEnd_toEndOf="@+id/HeartDiseaseButton"
+        app:layout_constraintStart_toStartOf="@+id/HeartDiseaseButton"
+        app:layout_constraintTop_toTopOf="@id/HeartDiseaseButton"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <Button
+        android:id="@+id/HeartDiseaseButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/ic_blue_background"
+        android:gravity="center|bottom"
+        android:text="@string/Heart"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DiabetesButton"
+        app:layout_constraintVertical_bias="0.5" />
+
+
+    <TextView
+        android:id="@+id/selectDisease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/select_illness_to_predict"
+        android:textColor="#0090FF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="imageViewAlzheimers,DiabetesButton,imageViewDiabetes,AlzheimersButton,imageViewHeart,HeartDiseaseButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -16,6 +16,8 @@ import com.example.medi_app.R;
 import java.net.ContentHandler;
 
 public class CustomToast {
+    public static Object createToastapplicationContext;
+
     public static void createToast(Context context, String message, boolean error)
     {
         Toast toast = new Toast(context);
