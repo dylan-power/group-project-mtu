@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>User Dashboard</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Medi-Web</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sign_in.html">Sign in</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome</h1>
+        <p>Please choose a service below. If you wish to sign out, please press the 'Logout' button near the end of the page.</p>
+    </div>
+
+    <button class="btn btn-default" id="logoutbtn">Log out</button>
+    <script type="module" src="/js/logout.js"></script>
+
+    <p id="collapsible-buttons">
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapsible" aria-expanded="false" aria-controls="collapsible">
+            VIEW PATIENTS
+        </button>
+
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapsible2" aria-expanded="false" aria-controls="collapsible2">
+            VIEW PATIENT RISK PROFILE
+        </button>
+
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapsible3" aria-expanded="false" aria-controls="collapsible3">
+            RUN PATIENT RISK REPORT
+        </button>
+
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapsible4" aria-expanded="false" aria-controls="collapsible4">
+            EXPORT PATIENT DATASET
+        </button>
+
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapsible5" aria-expanded="false" aria-controls="collapsible5">
+            INPUT PATIENT MEDICAL DATA
+        </button>
+
+        <div class="collapse" id="collapsible">
+            <div class="card card-body">
+                Here, you can <a href="view_patients.html">view your patients and their details.</a> 
+            </div>
+        </div>
+
+        <div class="collapse" id="collapsible2">
+            <div class="card card-body">
+                Here, you can view a patient's risk profile for alzheimer's, diabetes and heart disease. 
+            </div>
+        </div>
+
+        <div class="collapse" id="collapsible3">
+            <div class="card card-body">
+                Here, you can run a patient risk report and gauge their risk for alzheimer's, diabetes and heart disease. 
+            </div>
+        </div>
+
+        <div class="collapse" id="collapsible4">
+            <div class="card card-body">
+                You can create and export new datasets through our Medi-AI software. 
+            </div>
+        </div>
+
+        <div class="collapse" id="collapsible5">
+            <div class="card card-body">
+                Here, you can choose a patient and <a href="input_patient_data.html">input their data.</a>
+            </div>
+        </div>
+    </p>
+
+    
+
+    <footer class="footer">
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-instagram"></a>
+        <p>&copy 2021 Medi-Check</p>
+    </footer>
+</body>
+</html>

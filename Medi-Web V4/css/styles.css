@@ -1,0 +1,137 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #353935;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+td{
+    font-size: 16px;
+}
+
+.form-horizontal{
+    width: 30%;
+}
+
+.form-group{
+    position: relative;
+    top: 100px;
+    left: 700px;
+}
+
+.item{
+    height: 1000px;
+}
+
+.footer p{
+    position: relative;
+    left: 7px;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.fa:hover{
+    color: #B8C5D6;
+    transition-duration: 1s;
+    text-decoration: none;
+}
+
+#registerbtn{
+    position: absolute;
+    top: 650px;
+    left: 800px;
+}
+
+#loginbtn{
+    position: absolute;
+    top: 320px;
+    left: 800px;
+}
+
+#clearfieldsbtn{
+    position: absolute;
+    bottom: 222px;
+    left: 900px;
+}
+
+#logoutbtn{
+    position: absolute;
+    top: 500px;
+    left: 390px;
+}
+
+#collapsible-buttons{
+    position: absolute;
+    left: 390px;
+}
+
+#collapsible{
+    position: absolute;
+    top: 220px;
+    left: 390px;
+}
+
+#collapsible2{
+    position: absolute;
+    top: 220px;
+    left: 390px;
+}
+
+#collapsible3{
+    position: absolute;
+    top: 220px;
+    left: 390px;
+}
+
+#collapsible4{
+    position: absolute;
+    top: 220px;
+    left: 390px;
+}
+
+#collapsible5{
+    position: absolute;
+    top: 220px;
+    left: 390px;
+}
+
+.dropdown {
+    position: absolute;
+    left: 800px;
+    top: 300px;
+}
+
+.patient-dropdown {
+    position: absolute;
+    left: 1000px;
+    top: 300px;
+}
+
+#predictbtn {
+    position: absolute;
+    top: 400px;
+    left: 810px;
+}
+
+#contact {
+    position: absolute; 
+    left: 100px;
+    top: 130px;
+}
+
+iframe {
+    position: absolute; 
+    left: 100px;
+    top: 200px;
+}
