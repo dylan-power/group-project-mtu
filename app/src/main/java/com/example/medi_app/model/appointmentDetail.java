@@ -1,18 +1,20 @@
 package com.example.medi_app.model;
 
-public class appointmentDetail {
+public class appointmentDetail { // class for storing details of appointments to firebase
     private String GP;
     private String appointment_date;
     private String appointment_time;
     private String visit_type;
     private String notes;
+    private String price;
 
-    public appointmentDetail(String GP,String appointment_date,String appointment_time,String visit_type,String notes){
+    public appointmentDetail(String GP,String appointment_date,String appointment_time,String visit_type,String notes,String Price){
         this.GP = GP;
         this.appointment_date = appointment_date;
         this.appointment_time = appointment_time;
         this.visit_type = visit_type;
         this.notes = notes;
+        price = Price;
     }
 
     public String getGP() {
@@ -53,5 +55,13 @@ public class appointmentDetail {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.medi_app.model;
 
-public class SupportGPdetail {
+public class SupportGPdetail { // class for storing Support querys to GP's to firebase
     private String Query;
     private String Query_regarding;
     private String Query_Details;

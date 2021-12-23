@@ -29,12 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Request_expert extends AppCompatActivity {
+public class Request_expert extends AppCompatActivity {  // request an expert class
     TextView inname;
     TextView innumber;
     TextView inemail;
     TextView gpname;
-    TextView gpnumber;
+    TextView gpnumber;                          // set up viewa
     TextView gpemailtext;
     ImageView callgp;
     ImageView callinsurance;
@@ -49,7 +49,7 @@ public class Request_expert extends AppCompatActivity {
         setContentView(R.layout.activity_request_expert);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mDb = mDatabase.getReference();
+        DatabaseReference mDb = mDatabase.getReference();                   //firebase
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
@@ -58,14 +58,14 @@ public class Request_expert extends AppCompatActivity {
          inemail = findViewById(R.id.expert_in_emailTV);
          emailinsurance = findViewById(R.id.insurance_email);
          emailgpbutton = findViewById(R.id.email_gp_img);
-         gpname = findViewById(R.id.call_gpname);
+         gpname = findViewById(R.id.call_gpname);                   // initialise views
          gpnumber = findViewById(R.id.call_gps_number);
          gpemailtext = findViewById(R.id.expert_gp_emailTV);
          callgp = findViewById(R.id.gp_call);
          callinsurance = findViewById(R.id.insurance_call);
          cancel = findViewById(R.id.request_expertbutton);
 
-        mDb.child("Patients").child(userKey).addValueEventListener(new ValueEventListener() {
+        mDb.child("Patients").child(userKey).addValueEventListener(new ValueEventListener() { // get gp and insurance data from firebase
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String provider = String.valueOf(snapshot.child("Insurance Company Details").child("insurance_company_On_File").getValue());
@@ -80,7 +80,7 @@ public class Request_expert extends AppCompatActivity {
 
 
 
-                if (! (provider.equals("null") && providerno.equals("null") && gp.equals("null") && providereml.equals("null")&& gpeml.equals("null"))){
+                if (! (provider.equals("null") && providerno.equals("null") && gp.equals("null") && providereml.equals("null")&& gpeml.equals("null"))){ // if all info there set all textviews
 
                     inname.setText(provider);
                     innumber.setText(providerno);
@@ -92,7 +92,7 @@ public class Request_expert extends AppCompatActivity {
                 }
 
                  if (gp.equals("null") && gpno.equals("null")){
-                    gpname.setText("No details entered.. Tap here to enter details");
+                    gpname.setText("No details entered.. Tap here to enter details");           // if no gp entered
                     gpname.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -109,7 +109,7 @@ public class Request_expert extends AppCompatActivity {
 
                 }
 
-                 if (provider.equals("null") && providerno.equals("null")){
+                 if (provider.equals("null") && providerno.equals("null")){                 // if no insurance enteed
                     gpname.setText(gp);
                     gpnumber.setText(gpno);
 
@@ -125,7 +125,7 @@ public class Request_expert extends AppCompatActivity {
                      inemail.setText("No details entered..");
 
                 }
-                 if (provider.equals("null") && providerno.equals("null")&& providereml.equals("null") && gp.equals("null") && gpno.equals("null")&& gpeml.equals("null")){
+                 if (provider.equals("null") && providerno.equals("null")&& providereml.equals("null") && gp.equals("null") && gpno.equals("null")&& gpeml.equals("null")){ // if no gp or no insurance details entered
                     new AlertDialog.Builder(Request_expert.this)
                             .setTitle("No  details found")
                             .setMessage("You will need to provide us with your details before proceeding")
@@ -164,7 +164,7 @@ public class Request_expert extends AppCompatActivity {
 
         });
 
-        callinsurance.setOnClickListener(new View.OnClickListener() {
+        callinsurance.setOnClickListener(new View.OnClickListener() { // button to call insurance company
             @Override
             public void onClick(View view) {
                 numselected = "353"+innumber.getText().toString();
@@ -172,7 +172,7 @@ public class Request_expert extends AppCompatActivity {
             }
         });
 
-        emailinsurance.setOnClickListener(new View.OnClickListener() {
+        emailinsurance.setOnClickListener(new View.OnClickListener() {          // button to email insurance company
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -186,7 +186,7 @@ public class Request_expert extends AppCompatActivity {
             }
         });
 
-        callgp.setOnClickListener(new View.OnClickListener() {
+        callgp.setOnClickListener(new View.OnClickListener() {          // button to call gp
             @Override
             public void onClick(View view) {
                 numselected = gpnumber.getText().toString();
@@ -194,7 +194,7 @@ public class Request_expert extends AppCompatActivity {
             }
         });
 
-        emailgpbutton.setOnClickListener(new View.OnClickListener() {
+        emailgpbutton.setOnClickListener(new View.OnClickListener() {          // button to email gp
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -224,21 +224,21 @@ public class Request_expert extends AppCompatActivity {
 
 
 
-    private void makePhoneCall() {
+    private void makePhoneCall() {  // make a phone call method
 
         if (!numselected.trim().equals("No details entered..")) {
 
             if (ContextCompat.checkSelfPermission(Request_expert.this,
                     Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(Request_expert.this,
+                ActivityCompat.requestPermissions(Request_expert.this,              // ask for permission to use phone
                         new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
             } else {
                 String dial = "tel:" + numselected;
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));  // go to phone app
             }
 
         } else {
-            CustomToast.createToast(this,"You need to enter these details!", true);
+            CustomToast.createToast(this,"You need to enter these details!", true);      // error checking
         }
 
 
@@ -248,7 +248,7 @@ public class Request_expert extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_CALL) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {      // user selects allow - make the call
                 makePhoneCall();
             } else {
                 CustomToast.createToast(this,"Permission DENIED", true);

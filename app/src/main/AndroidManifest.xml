@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MediApp">
         <activity
+            android:name=".StepCounter"
+            android:exported="false" />
+        <activity
             android:name=".SetupAppointment"
             android:exported="false" />
         <activity

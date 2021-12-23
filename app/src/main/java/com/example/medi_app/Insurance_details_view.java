@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Insurance_details_view extends AppCompatActivity {
+public class Insurance_details_view extends AppCompatActivity { // class for viewing insurance details
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +33,21 @@ public class Insurance_details_view extends AppCompatActivity {
 
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();        //firebase
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
+
+
         TextView providerFB = findViewById(R.id.provider_input_tv);
         TextView policynoFB = findViewById(R.id.policyno_input_tv);
         TextView startdateFB = findViewById(R.id.input_startdate_tv);
-        TextView enddateFB = findViewById(R.id.input_enddate_tv);
+        TextView enddateFB = findViewById(R.id.input_enddate_tv);           // set up views
         TextView contactnumFB = findViewById(R.id.contact_num);
         Button amend = findViewById(R.id.Amend_details_button);
         Button ok = findViewById(R.id.details_ok_btn);
 
-        mDb.child("Patients").child(userKey).child("Insurance Company Details").addValueEventListener(new ValueEventListener() {
+        mDb.child("Patients").child(userKey).child("Insurance Company Details").addValueEventListener(new ValueEventListener() {  // get details from firebase
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String provider = String.valueOf(snapshot.child("insurance_company_On_File").getValue());
@@ -54,16 +56,16 @@ public class Insurance_details_view extends AppCompatActivity {
                 String end = String.valueOf(snapshot.child("policy_End").getValue());
                 String num = String.valueOf(snapshot.child("contact_number").getValue());
 
-                if (! (provider.equals("null") && polno.equals("null") && start.equals("null") && end.equals("null"))){
+                if (! (provider.equals("null") && polno.equals("null") && start.equals("null") && end.equals("null"))){ // if user has entered insurance details
 
-                providerFB.setText(provider);
+                providerFB.setText(provider);                                                       // display the details
                 policynoFB.setText(polno);
                 startdateFB.setText(start);
                 enddateFB.setText(end);
                 contactnumFB.setText(num);
             }
                 else {
-                    new AlertDialog.Builder(Insurance_details_view.this)
+                    new AlertDialog.Builder(Insurance_details_view.this)                    // otherwise show a dialog asking to enter details
                             .setTitle("No Insurance details found")
                             .setMessage("You will need to provide us with your Insurance details before proceeding")
 
@@ -102,7 +104,7 @@ public class Insurance_details_view extends AppCompatActivity {
 
         });
 
-        amend.setOnClickListener(new View.OnClickListener() {
+        amend.setOnClickListener(new View.OnClickListener() {                   // allow user to change their details
             @Override
             public void onClick(View view) {
                 Intent x = new Intent(Insurance_details_view.this, insurance_details.class);
@@ -112,12 +114,11 @@ public class Insurance_details_view extends AppCompatActivity {
             }
         });
 
-        ok.setOnClickListener(new View.OnClickListener() {
+        ok.setOnClickListener(new View.OnClickListener() {                      // go back to homepage
             @Override
             public void onClick(View view) {
                 Intent x = new Intent(Insurance_details_view.this, HomepageActivity.class);
                 x.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                    CustomToast.createToast(Insurance_details_view.this,"Insurance details Submitted", false);
                 startActivity(x);
             }
         });

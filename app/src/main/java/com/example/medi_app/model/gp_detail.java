@@ -1,6 +1,6 @@
 package com.example.medi_app.model;
 
-public class gp_detail {
+public class gp_detail { // class for storing gp details entered by the patient into firebase
     private String uuid;
     private String Name;
     private String Office_address;

@@ -17,6 +17,9 @@
     <string name="reviewbuttonsubmit">Submit</string>
     <string name="review_welcome_textview">Hi, %1$s! \n \n At Medi-App, we value your opinion. Please help us by answering the questions below. Your feedback will remain anonymous and will be used to enhance your Medi-App experience.</string>
     <string name="support_welcome_textview">Hi, %1$s! \n \n Please select whether you would like support from your insurance company or from your GP \n \n Please select an option below to get started.</string>
+    <string name="coin_welcome_textview">Hi, %1$s! \n \n Please select whether you would like to pay for your insurance premium or for an upcoming appointment with your GP</string>
+    <string name="predict_welcome_textview">Hi, %1$s! \n \n Welcome to Medi-Predict, Here our machine learning algorithms are trained to calculate risk of illness based on your lifestyle and prior medical history that you have shared with your GP</string>
+
     <string name="medi_app_gp_details">Medi-App GP Details</string>
     <string name="medi_app_medical_information">Medi-App Medical Information</string>
     <string name="first_name">First name</string>

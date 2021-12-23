@@ -1,11 +1,15 @@
 package com.example.medi_app.model;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +17,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.medi_app.R;
+import com.example.medi_app.util.CustomToast;
 
-public class Dialog extends AppCompatDialogFragment {
+public class Dialog extends AppCompatDialogFragment { // class for Dialog that shows when patients insurance company is not on file
 
     private EditText editTextinsurancecompany;
     private EditText edittextphone;
@@ -36,11 +41,33 @@ public class Dialog extends AppCompatDialogFragment {
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String company = editTextinsurancecompany.getText().toString();
+                        try {
+                        String company = editTextinsurancecompany.getText().toString(); // get values from the textfields
                         String phoneString = edittextphone.getText().toString();
                         String emailstring = edittextemail.getText().toString();
+
+
+
                         int phone = Integer.parseInt(phoneString.replaceAll("[\\D]", ""));
+
+                        if(company.equals("")){
+                            editTextinsurancecompany.setError("Please enter your Insurance company's name"); // error checking
+                            editTextinsurancecompany.requestFocus();
+                        }
+                            if(phoneString.isEmpty()){
+                                edittextphone.setError("Please enter your Insurance company's name");
+                                edittextphone.requestFocus();
+                            }
+                            if(emailstring.isEmpty()){
+                                edittextemail.setError("Please enter your Insurance company's name");
+                                edittextemail.requestFocus();
+                            }
+
                         listener.applyText(company,phone,emailstring);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                            CustomToast.createToast(getContext(),"Please enter a valid Phone Number!",true);
+                        }
 
                     }
                 });

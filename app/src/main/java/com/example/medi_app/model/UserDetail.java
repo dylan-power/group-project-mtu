@@ -1,6 +1,6 @@
 package com.example.medi_app.model;
 
-public class UserDetail {
+public class UserDetail { // class for storing the users details to firebase
     private String firstName;
     private String lastName;
     private String address;

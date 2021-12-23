@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class My_Medical_Information extends AppCompatActivity {
+public class My_Medical_Information extends AppCompatActivity {     // class where user can select to view or edit their insurance or GP details
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

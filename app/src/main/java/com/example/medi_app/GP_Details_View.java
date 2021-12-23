@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class GP_Details_View extends AppCompatActivity {
+public class GP_Details_View extends AppCompatActivity { // activity for viewing gp details on file
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +31,13 @@ public class GP_Details_View extends AppCompatActivity {
         setContentView(R.layout.activity_gp_details_view);
 
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance(); // firebase
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
-        TextView nameFB = findViewById(R.id.gpname_FB);
+        TextView nameFB = findViewById(R.id.gpname_FB); // initialise views
         TextView addrFB = findViewById(R.id.gpaddr_FB);
         TextView numFB = findViewById(R.id.gpnumb_FB);
         TextView emailFB = findViewById(R.id.gpemail_FB);
@@ -46,7 +46,7 @@ public class GP_Details_View extends AppCompatActivity {
         Button ok = findViewById(R.id.ok_gpv);
 
 
-        mDb.child("Patients").child(userKey).child("Associated GP").addValueEventListener(new ValueEventListener() {
+        mDb.child("Patients").child(userKey).child("Associated GP").addValueEventListener(new ValueEventListener() { // see if user has entered their gp details
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name = String.valueOf(snapshot.child("_Name").getValue());
@@ -55,8 +55,8 @@ public class GP_Details_View extends AppCompatActivity {
                 String emal = String.valueOf(snapshot.child("_Email").getValue());
                 String uid = String.valueOf(snapshot.child("uuid").getValue());
 
-                if (! (name.equals("null") && adr.equals("null") && numbr.equals("null") && emal.equals("null")&& uid.equals("null"))){
-
+                if (! (name.equals("null") && adr.equals("null") && numbr.equals("null") && emal.equals("null")&& uid.equals("null"))){ // if they have entered gp details
+//                    set the textviews to display gp info
                     nameFB.setText(name);
                     addrFB.setText(adr);
                     numFB.setText(numbr);
@@ -64,7 +64,7 @@ public class GP_Details_View extends AppCompatActivity {
                     uuid.setText(uid);
                 }
                 else {
-                    new AlertDialog.Builder(GP_Details_View.this)
+                    new AlertDialog.Builder(GP_Details_View.this) // no details - set an alert dialog prompting to enter details
                             .setTitle("No GP details found")
                             .setMessage("You will need to provide us with your GP's details before proceeding")
 
@@ -103,7 +103,7 @@ public class GP_Details_View extends AppCompatActivity {
 
         });
 
-        amend.setOnClickListener(new View.OnClickListener() {
+        amend.setOnClickListener(new View.OnClickListener() { // allow user to change their GP, takes them to the enter GP details class
             @Override
             public void onClick(View view) {
                 Intent x = new Intent(GP_Details_View.this, GP_Details.class);
@@ -113,7 +113,7 @@ public class GP_Details_View extends AppCompatActivity {
             }
         });
 
-        ok.setOnClickListener(new View.OnClickListener() {
+        ok.setOnClickListener(new View.OnClickListener() { // ok button to leave the page back to the homepage
             @Override
             public void onClick(View view) {
                 Intent x = new Intent(GP_Details_View.this, HomepageActivity.class);

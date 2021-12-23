@@ -14,7 +14,7 @@ import com.example.medi_app.R;
 import java.util.List;
 
 
-public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.ViewHolder> {
+public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.ViewHolder> { // recyclerview adapter for homepage
 
     private List<String> the_data;
     private List<Integer> the_image;

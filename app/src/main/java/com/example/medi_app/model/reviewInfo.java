@@ -1,6 +1,6 @@
 package com.example.medi_app.model;
 
-public class reviewInfo {
+public class reviewInfo { // class for storing review details to firebase
     private String firstName;
     private String Medi_coin_rating;
     private String Medi_predict_rating;

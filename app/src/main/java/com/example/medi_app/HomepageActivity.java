@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class HomepageActivity  extends AppCompatActivity implements RecyclerviewAdapter.ItemClickListener {
+public class HomepageActivity  extends AppCompatActivity implements RecyclerviewAdapter.ItemClickListener { // Main page with recyclerview for each elelment of the app
 
     TextView userTextView;
     RecyclerviewAdapter adapter;
@@ -36,22 +36,23 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-        userTextView=findViewById(R.id.loggedInTextView);
+        userTextView=findViewById(R.id.loggedInTextView); // shows the users name in the top bar
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance(); // firebase
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
         mDb.child("Patients").child(userKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username = String.valueOf(snapshot.child("firstName").getValue());
+                String username = String.valueOf(snapshot.child("firstName").getValue()); // set the users name to the topbar
                 userTextView.setText("Welcome "+ username);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                CustomToast.createToast(HomepageActivity.this,"Error",true);
 
             }
         });
@@ -67,6 +68,7 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
         homepage_icons_text.add("Request an expert");
         homepage_icons_text.add("Support");
         homepage_icons_text.add("Leave us a review");
+        homepage_icons_text.add("Step Counter");
 
         //arraylist to store images
         ArrayList<Integer> homepage_icons_images=new ArrayList<Integer>();
@@ -78,6 +80,8 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
         homepage_icons_images.add(R.drawable.requestexpert);
         homepage_icons_images.add(R.drawable.ic_baseline_contact_support_24);
         homepage_icons_images.add(R.drawable.leaveusareview);
+        homepage_icons_images.add(R.drawable.ic_steps);
+
 
         // set up the RecyclerView
         //1- initialise the recyclerview
@@ -139,7 +143,7 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
                 break;
             case 1:
                  intent =  new Intent(context, MediCoin.class);
-                context.startActivity(intent);
+                context.startActivity(intent);                                                          // for each item in the recyclerview when clicked it takes the user to the specified class
                 break;
             case 2:
                  intent =  new Intent(context, MediPredict.class);
@@ -162,6 +166,10 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
 
             case 6:
                 intent =  new Intent(context, Review_activity.class);
+                context.startActivity(intent);
+                break;
+            case 7:
+                intent =  new Intent(context, StepCounter.class);
                 context.startActivity(intent);
                 break;
         }

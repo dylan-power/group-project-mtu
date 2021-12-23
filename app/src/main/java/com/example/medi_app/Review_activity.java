@@ -36,7 +36,7 @@ import java.util.Objects;
 
 import android.os.Bundle;
 
-public class Review_activity extends AppCompatActivity {
+public class Review_activity extends AppCompatActivity { // class for user reviews
 
     RatingBar coinratingbar;
     RatingBar predictratingbar;
@@ -49,7 +49,7 @@ public class Review_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
-        TextView review_welcome_tv = findViewById(R.id.review_welcome_textview);
+        TextView review_welcome_tv = findViewById(R.id.review_welcome_textview);        // set up views
         RatingBar coinratingbar = findViewById(R.id.medicoin_ratingbar);
         RatingBar predictatingbar = findViewById(R.id.medipredict_ratingbar);
         otherfbck = findViewById(R.id.input_review);
@@ -58,23 +58,23 @@ public class Review_activity extends AppCompatActivity {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mDb = mDatabase.getReference();
+        DatabaseReference mDb = mDatabase.getReference();                   //firebase
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
         mDb.child("Patients").child(userKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String username = String.valueOf(dataSnapshot.child("firstName").getValue());
+                String username = String.valueOf(dataSnapshot.child("firstName").getValue());       // get users email and name
                 String email = String.valueOf(dataSnapshot.child("email").getValue());
 
                 Resources res = getResources();
-                String text = String.format(res.getString(R.string.review_welcome_textview), username);
+                String text = String.format(res.getString(R.string.review_welcome_textview), username);     // set welcome text to show users name
                 review_welcome_tv.setText(text);
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        reviewInfo reviewinfo = new reviewInfo(username,email,String.valueOf(coinratingbar.getRating()),String.valueOf(predictatingbar.getRating()),otherfbck.getText().toString());
+                        reviewInfo reviewinfo = new reviewInfo(username,email,String.valueOf(coinratingbar.getRating()),String.valueOf(predictatingbar.getRating()),otherfbck.getText().toString()); // send to firebase
                         mDatabase.getReference().child("Patients").child("User Reviews").setValue(reviewinfo);
                         Intent i = new Intent(Review_activity.this, HomepageActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

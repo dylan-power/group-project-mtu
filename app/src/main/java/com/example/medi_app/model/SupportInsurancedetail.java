@@ -1,6 +1,6 @@
 package com.example.medi_app.model;
 
-public class SupportInsurancedetail {
+public class SupportInsurancedetail {// class for storing Support querys to Insurance companys's to firebase
     private String Query;
     private String Query_regarding;
     private String Query_Details;

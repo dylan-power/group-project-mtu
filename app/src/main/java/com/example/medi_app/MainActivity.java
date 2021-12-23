@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {  // first page for logging in and or signing up
 
     EditText emailId, password;
     Button btnSignIn;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn = findViewById(R.id.signInButton);
         tvSignUp = findViewById(R.id.textViewSignUp);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();          // firebase
         firebaseAuth=FirebaseAuth.getInstance();
         
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -65,15 +65,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() { // sign in button
             @Override
             public void onClick(View view) {
-                String email= emailId.getText().toString();
+                String email= emailId.getText().toString();         // get values entered
                 String pwd = password.getText().toString();
 
                 if(email.isEmpty()) {
                     emailId.setError("Please provide your email");
-                    emailId.requestFocus();
+                    emailId.requestFocus();                                        // error checking
                 }
                 else if (pwd.isEmpty()) {
                     password.setError("Please provide your Password");
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(!(email.isEmpty()&&pwd.isEmpty()))
                 {
-                    firebaseAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() { // sign in with firebase authentication
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful())
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
+        tvSignUp.setOnClickListener(new View.OnClickListener() { // sign up button to go to the sign up class
             @Override
             public void onClick(View view) {
                 Intent intSignUp = new Intent(MainActivity.this,Signup.class);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth.addAuthStateListener(mAuthStateListener);
         }
 
-    private void moveToHomeActivity(FirebaseUser mFirebaseuser) {
+    private void moveToHomeActivity(FirebaseUser mFirebaseuser) { // login successful - go to homepage
         firebaseDatabase.getReference().child("Patients").child(mFirebaseuser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

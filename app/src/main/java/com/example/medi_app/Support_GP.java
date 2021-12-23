@@ -1,8 +1,10 @@
 package com.example.medi_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,19 +23,22 @@ import com.example.medi_app.model.SupportGPdetail;
 import com.example.medi_app.util.CustomToast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Support_GP extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Support_GP extends AppCompatActivity implements AdapterView.OnItemSelectedListener { // class for support form for GP's
     Spinner queryspinner;
     List<String> queries;
     RadioGroup radioGroup;
     RadioButton radioButton;
     RadioButton radioButton1;
-    RadioButton radioButton2;
+    RadioButton radioButton2;                       // set up viewa
     RadioButton radioButton3;
     EditText editText;
     Button cancel;
@@ -45,7 +50,7 @@ public class Support_GP extends AppCompatActivity implements AdapterView.OnItemS
         queryspinner = findViewById(R.id.supportgpspinner);
         radioGroup = findViewById(R.id.GPradioGroup);
         editText = findViewById(R.id.gp_querytext);
-        cancel = findViewById(R.id.gpquerycancelbutton);
+        cancel = findViewById(R.id.gpquerycancelbutton);                        // initialise views
         submit = findViewById(R.id.gpquerysubmitbutton);
         radioButton1 = findViewById(R.id.GPradioButton);
         radioButton2 = findViewById(R.id.GPradioButton2);
@@ -55,21 +60,76 @@ public class Support_GP extends AppCompatActivity implements AdapterView.OnItemS
         radioButton = findViewById(radioid);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();            // firebase
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
+
+        mDb.child("Patients").child(userKey).child("Associated GP").addValueEventListener(new ValueEventListener() {        // get patients associated gp from DB
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String name = String.valueOf(snapshot.child("_Name").getValue());
+                String adr = String.valueOf(snapshot.child("office_address").getValue());
+                String numbr = String.valueOf(snapshot.child("contact_num").getValue());
+                String emal = String.valueOf(snapshot.child("_Email").getValue());
+                String uid = String.valueOf(snapshot.child("uuid").getValue());
+
+                if ( name.equals("null") && adr.equals("null") && numbr.equals("null") && emal.equals("null")&& uid.equals("null")){        // if no details entered show a dialog asking to enter details
+
+
+
+
+
+                    new AlertDialog.Builder(Support_GP.this)
+                            .setTitle("No GP details found")
+                            .setMessage("You will need to provide us with your GP's details before proceeding")
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton("Enter GP details", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    Intent i = new Intent(Support_GP.this, GP_Details.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    CustomToast.createToast(Insurance_details_view.this,"Insurance details Submitted", false);
+                                    startActivity(i);
+                                }
+                            })
+
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent x = new Intent(Support_GP.this, HomepageActivity.class);
+                                    x.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    CustomToast.createToast(Insurance_details_view.this,"Insurance details Submitted", false);
+                                    startActivity(x);
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                CustomToast.createToast(Support_GP.this,"Error",true);
+            }
+
+
+        });
+//        if user has GP registered continue
         queries = new ArrayList<>();
         queries.add("An upcoming appointment");
-        queries.add("My current medication");
+        queries.add("My current medication");       // add queries to arraylist for dropdown menu
         queries.add("My Medi-Predict result");
         queries.add("Other");
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Support_GP.this,android.R.layout.simple_spinner_item,queries);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Support_GP.this,android.R.layout.simple_spinner_item,queries);  // set queries to dropdown
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         queryspinner.setAdapter(arrayAdapter);
         queryspinner.setOnItemSelectedListener(this);
+
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +141,7 @@ public class Support_GP extends AppCompatActivity implements AdapterView.OnItemS
             }
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        submit.setOnClickListener(new View.OnClickListener() { // send query to database
             @Override
             public void onClick(View view) {
                 SupportGPdetail supportGPdetail = new SupportGPdetail(queryspinner.getSelectedItem().toString(),radioButton.getText().toString(),editText.getText().toString());
@@ -108,7 +168,7 @@ public class Support_GP extends AppCompatActivity implements AdapterView.OnItemS
 
         }
         if ( item.equals("My current medication") ){
-            radioGroup.setVisibility(View.VISIBLE);
+            radioGroup.setVisibility(View.VISIBLE);                                                                 //error checking
             editText.setHint("Please provide us with the details of your query");
             radioButton1.setText("Current dosage");
             radioButton2.setText("New perscription needed");
@@ -145,7 +205,7 @@ public class Support_GP extends AppCompatActivity implements AdapterView.OnItemS
         if (radioButton.getText().equals("Reschedule my appointment")){
             editText.setHint("Please enter the date and time you would like to reschedule to");
         }
-        if (radioButton.getText().equals("Cancel my appointment")){
+        if (radioButton.getText().equals("Cancel my appointment")){                                     // changing hint of textfield as required
             editText.setHint("Please state the reason for cancelling");
         }
         if (!(radioButton.getText().equals("Cancel my appointment")) && ! (radioButton.getText().equals("Reschedule my appointment"))){

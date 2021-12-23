@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GP_Details extends AppCompatActivity {
+public class GP_Details extends AppCompatActivity { // entering GP details class
     Spinner spinner;
     DatabaseReference databaseReference;
     List<String> gps;
@@ -46,14 +46,14 @@ public class GP_Details extends AppCompatActivity {
 
         setContentView(R.layout.activity_gp_details);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance(); // firebase
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
-        spinner = findViewById(R.id.insurance_spinner);
-        gps = new ArrayList<>();
+        spinner = findViewById(R.id.insurance_spinner); //find views
+        gps = new ArrayList<>(); // arraylist to store gps names
         address = findViewById(R.id.gpaddr_tv);
         email = findViewById(R.id.gpemail_tv);
         number = findViewById(R.id.gpnumb_tv);
@@ -61,7 +61,7 @@ public class GP_Details extends AppCompatActivity {
         Button submitbtn = findViewById(R.id.gpdets_submit);
         Button cancelbtn = findViewById(R.id.gpdets_cancel);
 
-        ArrayList<String> address_al = new ArrayList<>();
+        ArrayList<String> address_al = new ArrayList<>(); //arraylists for other gp details
         ArrayList<String> email_al = new ArrayList<>();
         ArrayList<String> phonenumber = new ArrayList<>();
         ArrayList<String> uuids = new ArrayList<>();
@@ -69,13 +69,13 @@ public class GP_Details extends AppCompatActivity {
         mDb.child("Patients").child(userKey).child("Associated GP").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String name = String.valueOf(snapshot.child("_Name").getValue());
+                String name = String.valueOf(snapshot.child("_Name").getValue()); // get values from firebase
                 String adr = String.valueOf(snapshot.child("office_address").getValue());
                 String numbr = String.valueOf(snapshot.child("contact_num").getValue());
                 String emal = String.valueOf(snapshot.child("_Email").getValue());
                 String uid = String.valueOf(snapshot.child("uuid").getValue());
 
-                if ( !(name.equals("null") && adr.equals("null") && numbr.equals("null") && emal.equals("null")&& uid.equals("null"))){
+                if ( !(name.equals("null") && adr.equals("null") && numbr.equals("null") && emal.equals("null")&& uid.equals("null"))){ // if data is already entered to the DB set an error message
 
 
                     new AlertDialog.Builder(GP_Details.this)
@@ -115,7 +115,7 @@ public class GP_Details extends AppCompatActivity {
         });
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("Medical Professionals").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Medical Professionals").addValueEventListener(new ValueEventListener() { // Find all Doctors registered and add them to the arraylists
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -129,7 +129,7 @@ public class GP_Details extends AppCompatActivity {
                     phonenumber.add(childsnapshot.child("phone").getValue(String.class));
                     gps.add(spinnerGPfirstname + " " + spinnerGPlastname);
                 }
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(GP_Details.this, android.R.layout.simple_spinner_item, gps);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(GP_Details.this, android.R.layout.simple_spinner_item, gps); // set the gps name arraylist to the spinner dropdown so the user can select their GP
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 spinner.setAdapter(arrayAdapter);
 
@@ -145,7 +145,7 @@ public class GP_Details extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) { // listener for when a user selects a name
                 String add = address_al.get(position).toString();
                 String eml = email_al.get(position).toString();
                 String numb = phonenumber.get(position).toString();
@@ -166,7 +166,7 @@ public class GP_Details extends AppCompatActivity {
     submitbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            gp_detail gp = new gp_detail(gpID.getText().toString(),spinner.getSelectedItem().toString(),address.getText().toString(),number.getText().toString(),email.getText().toString());
+            gp_detail gp = new gp_detail(gpID.getText().toString(),spinner.getSelectedItem().toString(),address.getText().toString(),number.getText().toString(),email.getText().toString()); // when user clicks submit get all values and send to firebase
             mDatabase.getReference().child("Patients").child(userKey).child("Associated GP").setValue(gp);
             Intent i = new Intent(GP_Details.this, HomepageActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

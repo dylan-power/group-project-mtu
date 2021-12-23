@@ -44,10 +44,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class insurance_details extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Dialog.DialogListener {
+public class insurance_details extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Dialog.DialogListener { // class for entering insurance details
     private static final String TAG = "insurance_details";
-    Spinner insurancecomp_spinner;
-    Spinner levl_coverage_spinner;
+    Spinner insurancecomp_spinner;                              // set up views
+    EditText price;
     DatePickerDialog.OnDateSetListener mdatesetlistener;
     DatePickerDialog.OnDateSetListener enddatesetlistener;
     List<String> Insurance_companies;
@@ -58,33 +58,34 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insurance_details);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();             //firebase
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
-        insurancecomp_spinner = findViewById(R.id.insurance_spinner);
-//        levl_coverage_spinner = findViewById(R.id.level_of_coverage_spinner);
+        insurancecomp_spinner = findViewById(R.id.insurance_spinner);           //initialise views
+        price = findViewById(R.id.costinsurance);
         Button cancelbutton = findViewById(R.id.insurance_cancelbutton);
         Button submit = findViewById(R.id.submit_insurance_dets);
         Insurance_companies = new ArrayList<>();
         EditText policyNumber = findViewById(R.id.policy_number_et);
         TextView start_date = findViewById(R.id.DP_insurance_startdate_tv);
         TextView end_date = findViewById(R.id.DP_insurance_enddate_tv);
+        TextView a = findViewById(R.id.dialog_edit_insurancecompany);
         BufferedReader reader;
-        Insurance_companies.add(0,"Choose your Insurance Company");
+        Insurance_companies.add(0,"Choose your Insurance Company");     // add to arraylist so user can enter a different insurance company if required
         Insurance_companies.add("My Insurance Company is not listed here");
 
-        mDb.child("Patients").child(userKey).child("Insurance Company Details").addValueEventListener(new ValueEventListener() {
+        mDb.child("Patients").child(userKey).child("Insurance Company Details").addValueEventListener(new ValueEventListener() { // find users insurance details.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String provider = String.valueOf(snapshot.child("insurance_company_On_File").getValue());
+                String provider = String.valueOf(snapshot.child("insurance_company_On_File").getValue());       // set the values
                 String polno = String.valueOf(snapshot.child("policy_Number").getValue());
                 String start = String.valueOf(snapshot.child("policy_Start").getValue());
                 String end = String.valueOf(snapshot.child("policy_End").getValue());
 
-                if ( !(provider.equals("null") && polno.equals("null") && start.equals("null") && end.equals("null"))){
+                if ( !(provider.equals("null") && polno.equals("null") && start.equals("null") && end.equals("null"))){  // if user has already entered Insurance details, show dialog to say that they have already entered them
 
 
                     new AlertDialog.Builder(insurance_details.this)
@@ -126,11 +127,11 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
 
 
         try{
-            final InputStream file = getAssets().open("insurancefile.txt");
+            final InputStream file = getAssets().open("insurancefile.txt");  // insurance companys are stored in a file along with their email and phone number
             reader = new BufferedReader(new InputStreamReader(file));
-            String line = reader.readLine();
+            String line = reader.readLine();                                // read the lines of the file
             while(line != null){
-                Insurance_companies.add(line);
+                Insurance_companies.add(line);                      // add each line to the insurance company arraylist
                 line = reader.readLine();
             }
         } catch(IOException ioe){
@@ -139,7 +140,7 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
 
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(insurance_details.this,android.R.layout.simple_spinner_item,Insurance_companies);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(insurance_details.this,android.R.layout.simple_spinner_item,Insurance_companies); // set the spinner dropdown values to insurance companys arraylist
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         insurancecomp_spinner.setAdapter(arrayAdapter);
         insurancecomp_spinner.setOnItemSelectedListener(this);
@@ -154,7 +155,7 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
                 int smonth = cal.get(Calendar.MONTH);
                 int sday = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(insurance_details.this,
+                DatePickerDialog dialog = new DatePickerDialog(insurance_details.this,          // datepicker dialog to enter start date
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mdatesetlistener,
                         syear,smonth,sday);
@@ -180,7 +181,7 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
          public void onClick(View v) {
              Calendar cal = Calendar.getInstance();
              int eyear = cal.get(Calendar.YEAR);
-             int emonth = cal.get(Calendar.MONTH);
+             int emonth = cal.get(Calendar.MONTH);                                                      // datepicker dialog to enter end date
              int eday = cal.get(Calendar.DAY_OF_MONTH);
              DatePickerDialog d = new DatePickerDialog(insurance_details.this,
                      android.R.style.Theme_Holo_Light_Dialog_MinWidth,
@@ -206,19 +207,25 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
          public void onClick(View view) {
 
          String insurance_email = null;
-         String insurance_company = insurancecomp_spinner.getSelectedItem().toString();
+         String insurance_company = insurancecomp_spinner.getSelectedItem().toString();             //get selected insurance company from spinner
          final String insurance_company_phone = insurancecomp_spinner.getSelectedItem().toString();
-         int phone = Integer.parseInt(insurance_company_phone.replaceAll("[\\D]", ""));
-         String temp = insurance_company.replaceAll("\\d","").replace("-", "");;
-         String EMAIL_PATTERN = "([^.@\\s]+)(\\.[^.@\\s]+)*@([^.@\\s]+\\.)+([^.@\\s]+)";
-         String thename = temp.replaceAll(EMAIL_PATTERN,"").replace("-", "");;
-         Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(insurancecomp_spinner.getSelectedItem().toString());
-         while (m.find()){
-             insurance_email = m.group();
-         }
-         final String policyNo = policyNumber.getText().toString();
-         final String startdate = start_date.getText().toString();
+         try {
+
+
+             int phone = Integer.parseInt(insurance_company_phone.replaceAll("[\\D]", "")); // extract phone number
+             String temp = insurance_company.replaceAll("\\d", "").replace("-", "");
+             ;
+             String EMAIL_PATTERN = "([^.@\\s]+)(\\.[^.@\\s]+)*@([^.@\\s]+\\.)+([^.@\\s]+)";                    // extract email address with email pattern
+             String thename = temp.replaceAll(EMAIL_PATTERN, "").replace("-", "");
+             ;
+             Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(insurancecomp_spinner.getSelectedItem().toString());
+             while (m.find()) {
+                 insurance_email = m.group();
+
+             final String policyNo = policyNumber.getText().toString();
+         final String startdate = start_date.getText().toString();                          //get all values and store them to string
          final String endddate = end_date.getText().toString();
+         final String cos = price.getText().toString();
 
 
                 if (insurance_company.equals("Choose your Insurance Company")) {
@@ -229,7 +236,7 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
                     
 
 
-         } else if (policyNo.isEmpty()) {
+         } else if (policyNo.isEmpty()) {                                                               //error checking
                     policyNumber.setError("Please provide your Policy Number");
                     policyNumber.requestFocus();
          } else if (startdate.isEmpty()) {
@@ -238,11 +245,16 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
          } else if (endddate.isEmpty()) {
                     end_date.setError("Please enter the end date of your policy");
                     end_date.requestFocus();
+                } else if (cos.isEmpty()) {
+                    price.setError("Please enter the amount you are paying");
+                    price.requestFocus();
 
-         } else if (!(insurance_company.isEmpty() && insurance_company.equals("Choose your Insurance Company"))) {
+         }
+
+                else if (!(insurance_company.isEmpty() && insurance_company.equals("Choose your Insurance Company"))) {     // add to firebase
 
                     // firebase here
-                    insuranceDetail insuranceDetail = new insuranceDetail(thename.trim(),policyNo,startdate,endddate, phone,insurance_email);
+                    insuranceDetail insuranceDetail = new insuranceDetail(thename.trim(),policyNo,startdate,endddate, phone,insurance_email,cos);
                     mDatabase.getReference().child("Patients").child(userKey).child("Insurance Company Details").setValue(insuranceDetail);
                     Intent i = new Intent(insurance_details.this, HomepageActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -250,8 +262,14 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
                     startActivity(i);
 
                 }
+             }
+         } catch (NumberFormatException e) {
+             CustomToast.createToast(insurance_details.this,"Please select an insurance company!",true);
          }
+         }
+
      });
+
 
         cancelbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -332,9 +350,19 @@ public class insurance_details extends AppCompatActivity implements AdapterView.
 
     @Override
     public void applyText(String company,int phone,String email) {
-        Insurance_companies.add(company +"                                                                                 - "+ email + "   "+phone);
+        if (company.isEmpty()) {
+            CustomToast.createToast(this, "Please enter your Insurance company's name", false);
+        }
+        if (String.valueOf(phone).isEmpty()) {
+            CustomToast.createToast(this, "Please enter a valid Phone Number!", false);
+        }
+        if (email.isEmpty()) {
+            CustomToast.createToast(this, "Please enter your Insurance company's Email", false);
+        }
+        if (!(company.isEmpty()&& String.valueOf(phone).isEmpty() && email.isEmpty())) {
+            Insurance_companies.add(company + "                                                                                 - " + email + "   " + phone);
+        }
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 

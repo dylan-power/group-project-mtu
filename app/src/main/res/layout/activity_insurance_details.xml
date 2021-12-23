@@ -119,12 +119,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
-        android:text="@string/insurancesubmit"
         android:backgroundTint="#03A9F4"
+        android:text="@string/insurancesubmit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/DP_insurance_enddate_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/costinsurance" />
 
     <Button
         android:id="@+id/insurance_cancelbutton"
@@ -132,10 +132,40 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="64dp"
-        android:text="@string/insruance_cancel"
         android:backgroundTint="#03A9F4"
+        android:text="@string/insruance_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="How much are you paying per month?"
+        app:layout_constraintEnd_toEndOf="@+id/insurance_end_tv"
+        app:layout_constraintStart_toStartOf="@+id/insurance_end_tv"
         app:layout_constraintTop_toBottomOf="@+id/insurance_end_tv" />
+
+    <EditText
+        android:id="@+id/costinsurance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="€"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="@+id/DP_insurance_enddate_tv"
+        app:layout_constraintStart_toStartOf="@+id/DP_insurance_enddate_tv"
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.222" />
+
+    <EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

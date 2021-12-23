@@ -22,9 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Support extends AppCompatActivity {
+public class Support extends AppCompatActivity {  // class for support forms
     TextView support_welcome_tv;
-    Button cancel;
+    Button cancel;                                  // set up views
     Button in;
     Button gp;
 
@@ -33,23 +33,23 @@ public class Support extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
         support_welcome_tv = findViewById(R.id.support_welcome_textv);
-        cancel = findViewById(R.id.cancelbuttonSupport);
+        cancel = findViewById(R.id.cancelbuttonSupport);                    // initialise views
         gp = findViewById(R.id.SupportGPbutton);
         in = findViewById(R.id.SupportInsurancebutton);
 
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();            // firebase
         DatabaseReference mDb = mDatabase.getReference();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
         mDb.child("Patients").child(userKey).addValueEventListener(new ValueEventListener() {
-            @Override
+            @Override                                                                               // set the users name to the welcome textfield
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String username = String.valueOf(dataSnapshot.child("firstName").getValue());
                 Resources res = getResources();
-                String text = String.format(res.getString(R.string.review_welcome_textview), username);
+                String text = String.format(res.getString(R.string.support_welcome_textview), username);
                 support_welcome_tv.setText(text);
     }
 
@@ -59,7 +59,7 @@ public class Support extends AppCompatActivity {
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {      //back to homepage
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Support.this, HomepageActivity.class);
@@ -68,7 +68,7 @@ public class Support extends AppCompatActivity {
             }
         });
 
-        gp.setOnClickListener(new View.OnClickListener() {
+        gp.setOnClickListener(new View.OnClickListener() {                      // takes user to form for GP support
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Support.this, Support_GP.class);
@@ -76,7 +76,7 @@ public class Support extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        in.setOnClickListener(new View.OnClickListener() {
+        in.setOnClickListener(new View.OnClickListener() { // takes user to form for insurance support
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Support.this, Support_Insurance.class);

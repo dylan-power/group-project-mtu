@@ -19,13 +19,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Signup extends AppCompatActivity {
+public class Signup extends AppCompatActivity {     // sign up to the app page
     EditText emailId, firstName, lastName, address, password;
     Button btnSignUp;
-    TextView tvSignIn;
+    TextView tvSignIn;                                              // set up views
 
     FirebaseAuth mFirebaseAuth;
-    FirebaseDatabase firebaseDatabase;
+    FirebaseDatabase firebaseDatabase;                              // firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +34,13 @@ public class Signup extends AppCompatActivity {
         firstName = findViewById(R.id.editTextFirstName);
         lastName = findViewById(R.id.editTextLastName);
         address = findViewById(R.id.editTextAddress);
-        password = findViewById(R.id.editTextPassword);
+        password = findViewById(R.id.editTextPassword);         // initialise views
         btnSignUp = findViewById(R.id.signUpButton);
         tvSignIn = findViewById(R.id.textViewSignIn);
 
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();                  // firebase
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,24 +58,24 @@ public class Signup extends AppCompatActivity {
                     firstName.requestFocus();
                 } else if (lName.isEmpty()) {
                     lastName.setError("Please provide your last name");
-                    lastName.requestFocus();
+                    lastName.requestFocus();                                            // error checking
                 } else if (add.isEmpty()) {
                     address.setError("Please provide your address");
                     address.requestFocus();
                 } else if (pwd.isEmpty()) {
                     password.setError("Please provide password");
                     password.requestFocus();
-                } else if (!(email.isEmpty() && pwd.isEmpty())) {
+                } else if (!(email.isEmpty() && pwd.isEmpty())) {                           // if details entered - create account with firebase
                     mFirebaseAuth.createUserWithEmailAndPassword(email,pwd)
                             .addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
                                 @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                public void onComplete(@NonNull Task<AuthResult> task) {        //failure
                                     if(!task.isSuccessful()) {
                                         CustomToast.createToast(Signup.this,"SignUp Unsuccessful, Please Try Again!"
                                         + task.getException().getMessage(),true);
                                     }
                                     else {
-                                        UserDetail userDetail = new UserDetail(fName,lName,add,email);
+                                        UserDetail userDetail = new UserDetail(fName,lName,add,email);          // details correct - send to firebase
                                         String uid = task.getResult().getUser().getUid();
                                         firebaseDatabase.getReference().child("Patients").child(uid).setValue(userDetail).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

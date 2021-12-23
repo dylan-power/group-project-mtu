@@ -1,23 +1,25 @@
 package com.example.medi_app.model;
 
-public class insuranceDetail {
+public class insuranceDetail { // class for storing insurance details to firebase
     private String Insurance_company_On_File;
     private String Policy_Number;
     private String Policy_Start;
     private String Policy_End;
     private int contact_number;
     private String email;
+    private String Monthly_Payments;
 
     public insuranceDetail() {
     }
 
-    public insuranceDetail(String Insurance_company_On_File, String Policy_Number, String Policy_Start, String Policy_End,int contact_number,String email) {
+    public insuranceDetail(String Insurance_company_On_File, String Policy_Number, String Policy_Start, String Policy_End,int contact_number,String email, String Monthly_Payments)  {
         this.Insurance_company_On_File = Insurance_company_On_File;
         this.Policy_Number = Policy_Number;
         this.Policy_Start = Policy_Start;
         this.Policy_End = Policy_End;
         this.contact_number = contact_number;
         this.email = email;
+        this.Monthly_Payments = Monthly_Payments;
 
     }
 
@@ -67,6 +69,14 @@ public class insuranceDetail {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getMonthly_Payments() {
+        return Monthly_Payments;
+    }
+
+    public void setMonthly_Payments(String Monthly_Payments) {
+        this.Monthly_Payments = Monthly_Payments;
     }
 }
 

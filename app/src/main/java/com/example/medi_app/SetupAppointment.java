@@ -1,5 +1,7 @@
 package com.example.medi_app;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,21 +41,23 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class SetupAppointment extends AppCompatActivity {
+public class SetupAppointment extends AppCompatActivity { // class for setting up appointments
     Spinner spinner;
     Spinner visitspinner;
     DatabaseReference databaseReference;
     List<String> gps;
     List<String> visit;
     EditText info;
-    String mygpsname;
+    String mygpsname;                                               // set up views
     DatePickerDialog.OnDateSetListener mdatesetlistener;
     TimePickerDialog.OnTimeSetListener mtimesetlistener;
     TextView apointmentdate;
     TextView apointmenttime;
+    TextView price;
     int hour, minute;
     Button cancel;
     Button submit;
+    int cost = 55;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class SetupAppointment extends AppCompatActivity {
         setContentView(R.layout.activity_setup_appointment);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mDb = mDatabase.getReference();
+        DatabaseReference mDb = mDatabase.getReference();                   //firebase
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userKey = user.getUid();
 
@@ -68,36 +73,45 @@ public class SetupAppointment extends AppCompatActivity {
         apointmentdate = findViewById(R.id.appointment_input_date);
         apointmenttime = findViewById(R.id.appointment_input_time);
         visitspinner = findViewById(R.id.appointment_visit_spinner);
-        info = findViewById(R.id.appointment_query_text);
+        info = findViewById(R.id.appointment_query_text);               // initialise views
         gps = new ArrayList<>();
         visit = new ArrayList<>();
         visit.add("General Checkup");
-        visit.add("Blood Test");
-        visit.add("Blood pressure test");
-        visit.add("Flu Vaccine");
-        visit.add("Covid Booster Shot");
-        visit.add("ECG test");
+        visit.add("Blood Test + €50");
+        visit.add("Blood pressure test +€50");              // add types of visits to arraylist
+        visit.add("Flu Vaccine +€20");
+        visit.add("Covid Booster Shot (Free)");
+        visit.add("ECG test +€80");
         cancel = findViewById(R.id.appointmentcancelbutton2);
         submit = findViewById(R.id.appointmentsubmitbutton2);
+        price = findViewById(R.id.price_TV);
 
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        mDb.child("Patients").child(userKey).child("Associated GP").addValueEventListener(new ValueEventListener() {
+        mDb.child("Patients").child(userKey).child("Associated GP").addValueEventListener(new ValueEventListener() { // find users registered GP
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 mygpsname = snapshot.child("_Name").getValue(String.class);
-
-                    gps.add(mygpsname + " (My GP)");
+                if(mygpsname==null){
+                    mygpsname = "No GP";                                                // if gp not entered yet, allow user to select from other available doctors
+                    gps.add(mygpsname + " Please select a doctor to visit");
                     gps.add("Select a different doctor");
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, gps);       // set the dropdown to the gp list
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                    spinner.setAdapter(arrayAdapter);
+                }
+                    else {                                                                      // if gp details entered this will display on the dropdown with (My GP) next to it
+                    gps.add(mygpsname + " (My GP)");
+                    gps.add("Select a different doctor");                                               //allow user to select a different doctor also
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, gps);
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                spinner.setAdapter(arrayAdapter);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, gps);   // set the dropdown to the gp list
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                    spinner.setAdapter(arrayAdapter);
 
-
+                }
             }
 
 
@@ -110,8 +124,8 @@ public class SetupAppointment extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (spinner.getSelectedItem().toString().equals("Select a different doctor")) {
-                    mDb.child("Medical Professionals").addValueEventListener(new ValueEventListener() {
+                if (spinner.getSelectedItem().toString().equals("Select a different doctor")) {             // if user wants to select a different doctor
+                    mDb.child("Medical Professionals").addValueEventListener(new ValueEventListener() {        // find all doctors in Firebase
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -119,23 +133,27 @@ public class SetupAppointment extends AppCompatActivity {
                             for (DataSnapshot childsnapshot : snapshot.getChildren()) {
 
                                 String spinnerGPfirstname = childsnapshot.child("firstName").getValue(String.class);
-                                String spinnerGPlastname = childsnapshot.child("surname").getValue(String.class);
+                                String spinnerGPlastname = childsnapshot.child("surname").getValue(String.class);           // set their names
                                 String name = spinnerGPfirstname + " " + spinnerGPlastname;
-                                gps.remove(1);
-                                gps.add(1,"Select a doctor");
-                                gps.add(name);
+                                gps.remove(1);                                                                      // remove "select a different doctor" from dropdown
+                                gps.add(1,"Select a doctor");                                                   // change this to "select a doctor"
+                                gps.add(name);                                                                        // add the doctors names to the arraylist
                             }
                             int i;
 
-                            // iterating over list to find gps name so its not duplicated
+                            // iterating over list to find gps name so its not duplicated -- if the user has selected a different doctor make sure it doesnt display their registered GP twice
                             for (i = 1; i < gps.size(); i++) {
 
                                 if (gps.get(i).toString().contains(mygpsname)){
                                     gps.remove(i); //remove that name
                                 }
+                                else {
+                                    Log.d(TAG, "onDataChange: ");
+                                }
+                                
                             }
 
-                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, gps);
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, gps);         // set all the gps to the dropdown
                             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                             spinner.setAdapter(arrayAdapter);
                             spinner.setSelection(1);
@@ -160,7 +178,7 @@ public class SetupAppointment extends AppCompatActivity {
         });
 
 
-        apointmentdate.setOnClickListener(new View.OnClickListener() {
+        apointmentdate.setOnClickListener(new View.OnClickListener() {      // date picker
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -189,7 +207,7 @@ public class SetupAppointment extends AppCompatActivity {
             }
         };
 
-        ArrayAdapter<String> arrayAdapterr = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, visit);
+        ArrayAdapter<String> arrayAdapterr = new ArrayAdapter<>(SetupAppointment.this, android.R.layout.simple_spinner_item, visit);    // set the types of visits array to another dropdown
         arrayAdapterr.setDropDownViewResource(android.R.layout.simple_spinner_item);
         visitspinner.setAdapter(arrayAdapterr);
 
@@ -199,7 +217,33 @@ public class SetupAppointment extends AppCompatActivity {
         visitspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = visitspinner.getSelectedItem().toString();
 
+                if (item.equals("General Checkup")) {
+                    cost =55;
+                }
+
+                if (item.equals("Blood Test + €50")) {
+                    cost =55+50;
+                }
+
+                if (item.equals("Blood pressure test +€50")) {
+                    cost =55+50;
+                }
+                                                                                            // there is a general charge of 55 for a visit
+                if (item.equals("Flu Vaccine +€20")) {
+                    cost =55+20;
+                }
+
+                if (item.equals("Covid Booster Shot (Free)")) {
+                    cost =55;
+                }
+
+                if (item.equals("ECG test +€80")) {
+                    cost = 55+80;
+                }
+
+               price.setText("€" + cost);
             }
 
             @Override
@@ -212,6 +256,22 @@ public class SetupAppointment extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (spinner.getSelectedItem().toString().equals("No GP Please select a doctor to visit")) {
+                    spinner.requestFocus();
+                    TextView errorText = (TextView) spinner.getSelectedView();
+                    errorText.setError("Select a doctor");
+                    errorText.setTextColor(Color.RED);//just to highlight that this is an error
+
+                }
+                if (spinner.getSelectedItem().toString().equals("Select a doctor")) {
+                    spinner.requestFocus();
+                    TextView errorText = (TextView) spinner.getSelectedView();
+                    errorText.setError("Select a doctor");
+                    errorText.setTextColor(Color.RED);//just to highlight that this is an error
+                                                                                                                                        // error checking
+                }
+
                 if(apointmentdate.getText().toString().equals("Enter Date")){
                     apointmentdate.setError("Please enter a date");
                     apointmentdate.requestFocus();
@@ -221,10 +281,10 @@ public class SetupAppointment extends AppCompatActivity {
                     apointmenttime.requestFocus();
                     CustomToast.createToast(SetupAppointment.this,"Please select a Time",true);
 
-                } else if (!(apointmentdate.getText().toString().equals("Enter Date") && apointmenttime.getText().toString().equals("Enter Time"))){
+                } else if (!(apointmentdate.getText().toString().equals("Enter Date") && apointmenttime.getText().toString().equals("Enter Time"))){ // if everthing entered, send to firebase
 
 
-                    appointmentDetail appointmentDetail = new appointmentDetail(spinner.getSelectedItem().toString(), apointmentdate.getText().toString(), apointmenttime.getText().toString(), visitspinner.getSelectedItem().toString(), info.getText().toString());
+                    appointmentDetail appointmentDetail = new appointmentDetail(spinner.getSelectedItem().toString(), apointmentdate.getText().toString(), apointmenttime.getText().toString(), visitspinner.getSelectedItem().toString(), info.getText().toString(),price.getText().toString());
                     mDatabase.getReference().child("Patients").child(userKey).child("Upcoming Appointment").setValue(appointmentDetail);
                     Intent i = new Intent(SetupAppointment.this, HomepageActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -276,7 +336,7 @@ public class SetupAppointment extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
-    public void popTimePicker(View view)
+    public void popTimePicker(View view) // time picker dialog
     {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
         {
