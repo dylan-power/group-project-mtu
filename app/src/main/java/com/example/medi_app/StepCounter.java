@@ -8,6 +8,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class StepCounter extends AppCompatActivity { // class for counting steps taken and calories burned
@@ -17,12 +19,14 @@ public class StepCounter extends AppCompatActivity { // class for counting steps
     private Integer stepCount = 0;
     private Float calories_perstep = 0.0f;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_counter);
         stepstaken = findViewById(R.id.steps_tv);
         cals = findViewById(R.id.calories_tv);
+        Button reset = findViewById(R.id.step_reset);
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
@@ -53,6 +57,16 @@ public class StepCounter extends AppCompatActivity { // class for counting steps
         };
 
         sensorManager.registerListener(stepDetector, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stepCount = 0;
+                calories_perstep= 0.0f;
+                stepstaken.setText(stepCount.toString() +" Steps" );
+                cals.setText(String.format("%.1f", calories_perstep));
+            }
+        });
     }
 
     protected void onPause() {

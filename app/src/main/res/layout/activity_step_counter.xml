@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".StepCounter">
 
+    <Button
+        android:id="@+id/step_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#03A9F4"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
     <TextView
         android:id="@+id/topbar_Stepcounter"
         android:layout_width="0dp"
@@ -71,4 +82,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/calories_tv" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

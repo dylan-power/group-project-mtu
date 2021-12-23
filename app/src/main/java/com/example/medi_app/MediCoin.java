@@ -121,7 +121,75 @@ public class MediCoin extends AppCompatActivity { // medi-coin class allow user 
             }
         });
 
+
+        gppay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(MediCoin.this) // alert to show medi coin not set up yet
+                        .setTitle("Medi-Coin Alert")
+                        .setMessage("Medi-Coin is currently still under development, please check back later. We apologise for any inconvenience this may cause")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton("Back to Homepage", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent x = new Intent(MediCoin.this, HomepageActivity.class);
+                                x.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(x);
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+            }
+
+        });
+
+        insurancepay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(MediCoin.this) // alert to show medi coin not set up yet
+                        .setTitle("Medi-Coin Alert")
+                        .setMessage("Medi-Coin is currently still under development, please check back later. We apologise for any inconvenience this may cause")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton("Back to Homepage", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent x = new Intent(MediCoin.this, HomepageActivity.class);
+                                x.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(x);
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+            }
+
+        });
+
     }
+
+
+
 
     @Override
     public void onBackPressed() {
