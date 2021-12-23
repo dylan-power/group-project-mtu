@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GP_Details_View">
+    <TextView
+        android:id="@+id/topbar_GP_details1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#03A9F4"
+        android:text="@string/medi_app_gp_details"
+        android:textAlignment="center"
+        android:textSize="28sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gpname_FB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="name"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gpname_tv1"
+        app:layout_constraintTop_toBottomOf="@+id/Gpdetailstv1" />
+
+    <TextView
+        android:id="@+id/gpname_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/gp_s_name"
+        app:layout_constraintBottom_toBottomOf="@+id/gpname_FB"
+        app:layout_constraintEnd_toStartOf="@+id/gpname_FB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gpname_FB"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/Gpdetailstv1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/below_are_the_details_of_your_gp_n_you_can_change_your_preferred_gp_by_clicking_amend_below"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar_GP_details1" />
+
+    <TextView
+        android:id="@+id/gpaddr_FB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="address"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/gpname_FB"
+        app:layout_constraintStart_toStartOf="@+id/gpname_FB"
+        app:layout_constraintTop_toBottomOf="@+id/gpname_FB" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Office address"
+        app:layout_constraintEnd_toStartOf="@+id/gpaddr_FB"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gpname_tv1"
+        app:layout_constraintTop_toTopOf="@+id/gpaddr_FB" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Contact number"
+        app:layout_constraintEnd_toStartOf="@+id/gpnumb_FB"
+        app:layout_constraintStart_toStartOf="@+id/textView41"
+        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Email address"
+        app:layout_constraintStart_toStartOf="@+id/textView51"
+        app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+    <TextView
+        android:id="@+id/gpnumb_FB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/gpaddr_FB"
+        app:layout_constraintStart_toStartOf="@+id/gpaddr_FB"
+        app:layout_constraintTop_toBottomOf="@+id/gpaddr_FB" />
+
+    <TextView
+        android:id="@+id/gpemail_FB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/gpnumb_FB"
+        app:layout_constraintStart_toEndOf="@+id/textView51"
+        app:layout_constraintTop_toBottomOf="@+id/gpnumb_FB" />
+
+    <TextView
+        android:id="@+id/gp_uuid_FB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/gpemail_FB"
+        app:layout_constraintStart_toStartOf="@+id/gpemail_FB"
+        app:layout_constraintTop_toBottomOf="@+id/gpemail_FB" />
+
+    <Button
+        android:id="@+id/ok_gpv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        app:layout_constraintBottom_toBottomOf="@+id/amend_gpv"
+        app:layout_constraintEnd_toEndOf="@+id/gpemail_FB"
+        app:layout_constraintTop_toTopOf="@+id/amend_gpv"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/amend_gpv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="168dp"
+        android:text="@string/amend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView61" />
+
+    <TextView
+        android:id="@+id/gps_id_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="9dp"
+        android:text="GP's Unique ID"
+        app:layout_constraintEnd_toStartOf="@+id/gp_uuid_FB"
+        app:layout_constraintStart_toStartOf="@+id/textView61"
+        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
