@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.medi_app.MediPredict.MediPredictEntry;
 import com.example.medi_app.util.CustomToast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -146,7 +147,7 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
                 context.startActivity(intent);                                                          // for each item in the recyclerview when clicked it takes the user to the specified class
                 break;
             case 2:
-                 intent =  new Intent(context, MediPredict.class);
+                 intent =  new Intent(context, MediPredictEntry.class);
                 context.startActivity(intent);
                 break;
             case 3:
@@ -169,8 +170,8 @@ public class HomepageActivity  extends AppCompatActivity implements Recyclerview
                 context.startActivity(intent);
                 break;
             case 7:
-                intent =  new Intent(context, StepCounter.class);
-                context.startActivity(intent);
+                Intent a =  new Intent(context, StepCounter.class);
+                context.startActivity(a);
                 break;
         }
     }
